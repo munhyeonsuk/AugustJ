@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body style="height:200vh">
+    <header id="hd" class="fixed-top">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <h1><a class="navbar-brand" href="/">Navbar</a></h1>
+              <button class="navbar-toggler" type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" 
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">                 
+                  <li class="nav-item">
+                    <a class="nav-link" href="#about">나의소개</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">작품들</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#preinterview">Interview</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <section class="content">
+        <div class="vh-100 bg-dark" id="banner">
+            나를 소개하는 스와이퍼 / 포트폴리오 소개 스와이퍼
+        </div>
+        <div id="about" class="vh-100 container-lg spycontent">
+            <h2>타이틀은 화면이 로딩되면 링크텍스트와 연동어야한다.</h2>
+        </div>
+        <div id="portfolio" class="vh-100 spycontent">
+            <h2>타이틀은 화면이 로딩되면 링크텍스트와 연동어야한다.</h2>
+        </div>
+        <div id="preinterview" class="vh-100 spycontent">
+            <h2>타이틀은 화면이 로딩되면 링크텍스트와 연동어야한다.</h2>
+        </div>
+        <div id="contact" class="vh-100 spycontent">
+            <h2>타이틀은 화면이 로딩되면 링크텍스트와 연동어야한다.</h2>
+        </div>
+    </section>
+    <footer></footer>
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            //$("[id='about'] h2").html($("[href='#about']").html());
+             // 숫자 $("#hd").css('marginTop'); 문자
+             var naviH = hdnum(); //리턴실행식 import와 export원리
+             hdcalc(naviH); //각 섹션의 상단 패딩적용
+            
+            
+
+            $("#banner").html("<h1>"+naviH+"</h1>").addClass("d-flex flex-colum justify-conent-center align-items-center");
+           
+           
+
+            $(window).resize(function(){
+                console.log($(this).width());               
+                naviH = hdnum(); // 실행결과를 저장함
+                $("#banner").html("<h1>"+naviH+"</h1>");
+                hdcalc(naviH);
+            })
+
+            //window.onresize =  hdcalc;
+            //window.addEventListener('resize', hdcalc)
+           
+
+            $(".spycontent h2").each(function(){
+                  //제이쿼리선택자는 제이쿼리메서드만 사용해
+                  // index(), $(this) : 각자
+                  console.log($(this).parent().attr("id"));
+                  // 각자 부모태그 아이디 출력
+                  $(this).html($(`[href='#${$(this).parent().attr("id")}']`).html());
+                  // 각 h2태그에 글자넣어줘
+                  // 링크값이 내 부모태그 아이디랑 똑같은 a태그 글자를 
+            })
+
+            function hdnum() { //실행시 숫자 리턴 함수
+                let hnum = $("#hd").height();
+                return hnum;  // 이미 숫자 값을 반환하므로 Number()로 변환할 필요가 없습니다.
+            }
+            function  hdcalc(h){                
+                $(".spycontent").css("paddingTop", h*2 );               
+            }
+            
+
+
+        })
+    </script>
+</body>
+</html>
